@@ -9,11 +9,7 @@
 </head>
 <body style="background-color:lightblue">
     <h3 class="text-center mt-3">Titulo</h3>
-    <?php
-        $cad1="image/jpg";
-        $cad2="image/";
-        echo strpos($cad1, $cad2);
-    ?>
+   
     <div class="container mt-3">
     </div>
 </body>
