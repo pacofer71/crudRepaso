@@ -1,0 +1,6 @@
+; tus opciones aquí
+[opciones]
+host=tu host aqui
+usuario=tu_usuario
+base=tu_base_de_datos
+pass=tu_pass
