@@ -1,4 +1,5 @@
 <?php
+session_start();
 require "../vendor/autoload.php";
 
 use Clases\Usuarios;
@@ -23,6 +24,12 @@ $losUsuarios = null;
     <h3 class="text-center mt-3">Gestión de Usuarios</h3>
 
     <div class="container mt-3">
+        <?php
+        if (isset($_SESSION['mensaje'])) {
+            echo "<p class='my-2 text-success'>{$_SESSION['mensaje']}</p>";
+            unset($_SESSION['mensaje']);
+        }
+        ?>
         <a href="crear.php" class="btn btn-success my-3">Crear Usuario</a>
         <table class="table table-dark table-striped">
             <thead>
@@ -41,7 +48,13 @@ $losUsuarios = null;
                     <th scope="row">{$fila->id}</th>
                     <td>{$fila->nombre}</td>
                     <td>{$fila->mail}</td>
-                    <td>#</td>
+                    <td>
+                    <form name="a" action="borrar.php" method='POST' class="form-inline">
+                    <input type="hidden" name="codigo" value='{$fila->id}' />
+                    <a href="update.php?id={$fila->id}" class="btn btn-warning mr-2">Editar</a>
+                    <button type="submit" class="btn btn-danger">Borrar</button>
+                    </form>
+                    </td>
                 </tr>
 TXT;
                 }
