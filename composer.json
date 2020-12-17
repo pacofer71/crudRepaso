@@ -19,6 +19,7 @@
     },
     "require": {
         "twbs/bootstrap": "^4.5",
-        "fortawesome/font-awesome": "^5.15"
+        "fortawesome/font-awesome": "^5.15",
+        "fakerphp/faker": "^1.12"
     }
 }

@@ -4,6 +4,7 @@ namespace Clases;
 
 use PDO;
 use PDOException;
+use Faker;
 
 require "../vendor/autoload.php";
 class Usuarios extends Conexion
@@ -132,4 +133,29 @@ class Usuarios extends Conexion
         }
         return $stmt;
     }
+    public function hayDatos(){
+        $c="select count(*) as total from usuarios";
+        $stmt = parent::$conexion->prepare($c);
+        try {
+            $stmt->execute();
+        } catch (PDOException $ex) {
+            die("Error al comprobar el numero deusuarios: " . $ex->getMessage());
+        }
+        return $stmt->fetch(PDO::FETCH_OBJ)->total;
+    }
+    public function rellenarTabla($cantidad){
+        if(!$this->hayDatos()){
+            $faker=Faker\Factory::create('es_ES');
+            for($i=0; $i<$cantidad; $i++){
+                $nombre=$faker->unique()->userName;
+                $pass=$faker->sha256;
+                $mail=$faker->unique()->freeEmail;
+                $c="insert into usuarios(nombre, pass, mail) values('$nombre', '$pass', '$mail')";
+                $stmt=parent::$conexion->prepare($c);
+                $stmt->execute();
+            }
+        }
+
+    }
+    //-----------------------------------------------------------------------
 }
